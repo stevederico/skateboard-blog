@@ -103,6 +103,9 @@ table {
 img {
 	max-width: 100%;
 	height: auto;
+	object-fit: cover;
+	max-height: 600px;
+	
 	border-radius: 8px;
 }
 code {
