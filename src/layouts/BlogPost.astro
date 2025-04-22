@@ -79,6 +79,12 @@ const { title, description, pubDate, updatedDate, heroImage } = Astro.props;
 					<slot />
 				</div>
 			</article>
+            <a
+                href="/blog"
+                class="inline-block mt-8 text-base underline underline-offset-4 hover:text-accent transition-colors"
+            >
+                &#8592; Back to Blog
+            </a>
 		</main>
 		<Footer />
 	</body>
