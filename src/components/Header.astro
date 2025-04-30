@@ -1,13 +1,15 @@
 ---
 import HeaderLink from './HeaderLink.astro';
 import { SITE_TITLE, LOGO_URL } from '../consts';
+import { Image } from 'astro:assets';
+
 ---
 
 <header>
 	<nav>
 	    <a href="/">
 		{LOGO_URL !== '' ? (
-			<img src={LOGO_URL} alt="Logo" class="h-10" />
+			<Image src={LOGO_URL} alt="Logo" class="h-10" />
 		) : (
 			<span>{SITE_TITLE}</span>
 		)}   </a>
