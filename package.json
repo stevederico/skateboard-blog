@@ -1,11 +1,12 @@
 {
   "name": "skateboard-blog",
   "type": "module",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "scripts": {
     "start": "astro dev",
     "build": "astro build",
     "preview": "astro preview",
+    "prod": "astro build; cp -r ./dist/* ../public/blog",
     "astro": "astro"
   },
   "dependencies": {

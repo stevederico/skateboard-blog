@@ -27,8 +27,18 @@ deno run start
 - MDX content collections
 - React 19 components
 - Tailwind CSS v4
+- DM Sans font
+- Dark mode (prefers-color-scheme)
+- JSON-LD structured data
 - RSS feed + sitemap
-- Atkinson font
+
+## Design
+
+- Card-based post index with hover glow
+- Sticky header with backdrop blur
+- Mobile hamburger menu
+- Semantic color tokens with dark mode
+- Responsive layout (760px max-width)
 
 ## Structure
 
@@ -39,5 +49,5 @@ src/
   pages/          — Routes (index, about, RSS, [slug])
   layouts/        — Page layout
   styles/         — Global CSS
-public/           — Static assets (fonts, images, favicon)
+public/           — Static assets (favicon)
 ```

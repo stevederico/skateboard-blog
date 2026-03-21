@@ -1,62 +1,118 @@
 ---
 import HeaderLink from './HeaderLink.astro';
 import { SITE_TITLE, LOGO_URL } from '../consts';
-import { Image } from 'astro:assets';
-
 ---
 
 <header>
 	<nav>
-	    <a href="/">
-		{LOGO_URL !== '' ? (
-			<Image src={LOGO_URL} alt="Logo" class="h-10" />
-		) : (
+		<a href="/blog" class="brand">
+			{LOGO_URL !== '' ? (
+				<img src={LOGO_URL} alt={SITE_TITLE} width="28" height="28" loading="eager" decoding="async" />
+			) : null}
 			<span>{SITE_TITLE}</span>
-		)}   </a>
-		<div class="internal-links">
+		</a>
+		<button id="blog-menu-toggle" class="menu-btn" aria-label="Toggle menu">
+			<svg width="24" height="24" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+				<line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/>
+			</svg>
+		</button>
+		<div class="desktop-links">
 			<HeaderLink href="/blog">Blog</HeaderLink>
 			<HeaderLink href="/blog/about">About</HeaderLink>
 		</div>
 	</nav>
+	<div id="blog-mobile-menu" class="mobile-menu hidden">
+		<a href="/blog">Blog</a>
+		<a href="/blog/about">About</a>
+	</div>
 </header>
+<script>
+	document.getElementById('blog-menu-toggle')?.addEventListener('click', () => {
+		document.getElementById('blog-mobile-menu')?.classList.toggle('hidden');
+	});
+</script>
 <style>
 	header {
-		margin: 0;
-		padding: 0 1em;
-		background: white;
-		box-shadow: 0 2px 8px rgba(var(--black), 5%);
-	}
-	h2 {
-		margin: 0;
-		font-size: 1em;
-	}
-
-	h2 a,
-	h2 a.active {
-		text-decoration: none;
+		padding: 0 1.5em;
+		background: var(--bg);
+		border-bottom: none;
+		position: sticky;
+		top: 0;
+		z-index: 10;
+		backdrop-filter: blur(12px);
+		-webkit-backdrop-filter: blur(12px);
 	}
 	nav {
 		display: flex;
 		align-items: center;
 		justify-content: space-between;
+		max-width: 960px;
+		margin: 0 auto;
+		height: 56px;
 	}
-	nav a {
-		padding: 1em 0.5em;
-		color: var(--black);
-		border-bottom: 4px solid transparent;
-		text-decoration: none;
-	}
-	nav a.active {
-		text-decoration: none;
-		border-bottom-color: var(--accent);
-	}
-	.social-links,
-	.social-links a {
+	.brand {
 		display: flex;
+		align-items: center;
+		gap: 0.5rem;
+		text-decoration: none;
+		color: var(--text-primary);
+		font-weight: 600;
+		font-size: 1.1rem;
+		padding: 0;
 	}
-	@media (max-width: 720px) {
-		.social-links {
-			display: none;
-		}
+	.brand:hover {
+		color: var(--text-primary);
+	}
+	.brand img {
+		border-radius: 6px;
+		height: 28px;
+		width: 28px;
+	}
+	.menu-btn {
+		display: none;
+		background: none;
+		border: none;
+		color: var(--text-muted);
+		cursor: pointer;
+		padding: 0.5rem;
+	}
+	.menu-btn:hover { color: var(--text-primary); }
+	.desktop-links {
+		display: flex;
+		align-items: center;
+		gap: 0.25rem;
+	}
+	.desktop-links a, .desktop-links :global(a) {
+		padding: 0.4em 0.6em;
+		color: var(--text-muted);
+		text-decoration: none;
+		font-size: 0.85rem;
+		border-radius: 6px;
+		transition: color 0.15s ease;
+	}
+	.desktop-links a:hover, .desktop-links :global(a:hover),
+	.desktop-links :global(a.active) {
+		color: var(--text-primary);
+	}
+	.mobile-menu {
+		display: none;
+		flex-direction: column;
+		gap: 0.75rem;
+		padding: 1rem 0.5rem 1.25rem;
+		border-top: 1px solid var(--border);
+	}
+	.mobile-menu a {
+		color: var(--text-secondary);
+		text-decoration: none;
+		font-size: 0.9rem;
+		padding: 0.25rem 0.5rem;
+		transition: color 0.15s ease;
+	}
+	.mobile-menu a:hover { color: var(--text-primary); }
+	.hidden { display: none !important; }
+	@media (max-width: 768px) {
+		.desktop-links { display: none; }
+		.menu-btn { display: block; }
+		.mobile-menu:not(.hidden) { display: flex; }
 	}
 </style>
